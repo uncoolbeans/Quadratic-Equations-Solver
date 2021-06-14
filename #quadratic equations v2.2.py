@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
+
 def discriminant(a,b,c):
     discriminant = (b**2)-(4*a*c)
     if discriminant > 0:
@@ -55,33 +56,58 @@ def maxMinRecieve():
             break
     return lst
 
-def coordinatesFind(min,max,a,b,c):
-    print("\nBelow are coordinates for the graph.")
-    
+def coordinatesFind(min,max,a,b,c,increment):
+    print("\nBelow are coordinates for the graph.(Note: values are rounded to 2 d.p. where applicable.)")
     x = min
     xCordList = []
     yCordList =[]
     cordsTable = PrettyTable(["x","y"])
     while x <= max:
         y = (a*x**2)+(b*x)+c
+        x = round(x, 2)
+        y = round(y,2)
         xCordList.append(x)
         yCordList.append(y)
         cordsTable.add_row([str(x),str(y)])
-        x+=1
+        x+=increment
     print(cordsTable)
+    plt.plot(xCordList,yCordList)
+    plt.show()
 
+def restart():
+    while True: 
+        restart = input("Restart? (y/n): ")
+        if restart == "y":
+            print("Restarting...\n")
+            return True
+            break
+        elif restart == "n":
+            print("Terminating...\n")
+            return False
+            break
+        else:
+            print("Invalid input. Re-enter.")
 
 
 
 
 def main():
-    print("Welcome to the quadratic equatvaion solver! Please enter your values in the following sequence ax^2+bx+c=0.\nThe program will automatically solve for x and find the coordinates of points for the graph of the equation, as well as weather it has real roots.")
-    valuesList = convert_Input_To_Int()
-    discriminant(valuesList[0],valuesList[1],valuesList[2])
-    print("Please enter maximum and minimum x range for coordinates finder.")
-    max_min_list = maxMinRecieve()
-    coordinatesFind(max_min_list[1],max_min_list[0],valuesList[0],valuesList[1],valuesList[2])
-
+    start = True
+    while start:
+        print("Welcome to the quadratic equatvaion solver! Please enter your values in the following sequence ax^2+bx+c=0.\nThe program will automatically solve for x and find the coordinates of points for the graph of the equation, as well as weather it has real roots.")
+        valuesList = convert_Input_To_Int()
+        discriminant(valuesList[0],valuesList[1],valuesList[2])
+        print("Please enter maximum and minimum x range for coordinates finder.")
+        max_min_list = maxMinRecieve()
+        while True:
+            increment = input("X-value increments (only floats and integers accepted, note that smaller increments will make the coordinates table harder to read): ")
+            try:
+                increment = float(increment)
+                break
+            except ValueError:
+                print("Invalid input. Try again.\n")
+        coordinatesFind(max_min_list[1],max_min_list[0],valuesList[0],valuesList[1],valuesList[2],increment)
+        start = restart()
 
         
 
