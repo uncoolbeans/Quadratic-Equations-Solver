@@ -9,11 +9,11 @@ import numpy as np
 def discriminant(a,b,c):
     discriminant = (b**2)-(4*a*c)
     if discriminant > 0:
-        print("Equation has 2 real and distinct roots.")
+        print("Equation has 2 real and distinct roots.\n")
     elif discriminant == 0:
-        print("Equation has 2 real and equal roots.")
+        print("Equation has 2 real and equal roots.\n")
     elif discriminant < 0:
-        print("Equation has no real roots.")
+        print("Equation has no real roots.\n")
 
 
 def convert_Input_To_Int():
@@ -27,7 +27,7 @@ def convert_Input_To_Int():
                 convertedLst.append(convertedInt)
                 break
             except ValueError:
-                print("Invalid input. Try again.")
+                print("Invalid input. Try again.\n")
     return convertedLst
 
 def maxMinRecieve():
@@ -48,7 +48,7 @@ def maxMinRecieve():
             except ValueError:
                 print("Invalid input. Try again.")
         if max <= min:
-            print("Error, maximum value is smaller than or equal to minimum, please check again.")
+            print("Error, maximum value is smaller than or equal to minimum, please check again.\n")
         else: 
             lst.append(max)
             lst.append(min)
@@ -56,9 +56,7 @@ def maxMinRecieve():
     return lst
 
 def coordinatesFind(min,max,a,b,c):
-    print("""Below are coordinates for the graph.
-    
-    """)
+    print("\nBelow are coordinates for the graph.")
     
     x = min
     xCordList = []
@@ -77,13 +75,7 @@ def coordinatesFind(min,max,a,b,c):
 
 
 def main():
-    print("""Welcome to the quadratic equatvaion solver! Please enter your values in the following sequence ax^2+bx+c=0
-
-The program will automatically solve for x and find the coordinates of points for the graph of the equation, 
-
-as well as weather it has real roots.
-
-""")
+    print("Welcome to the quadratic equatvaion solver! Please enter your values in the following sequence ax^2+bx+c=0.\nThe program will automatically solve for x and find the coordinates of points for the graph of the equation, as well as weather it has real roots.")
     valuesList = convert_Input_To_Int()
     discriminant(valuesList[0],valuesList[1],valuesList[2])
     print("Please enter maximum and minimum x range for coordinates finder.")
