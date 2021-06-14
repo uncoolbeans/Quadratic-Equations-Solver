@@ -4,7 +4,7 @@
 from prettytable import PrettyTable
 import matplotlib.pyplot as plt
 import numpy as np
-from math import sqrt
+import math
 
 
 
@@ -64,7 +64,7 @@ def coordinatesFind(min,max,a,b,c,increment):
     yCordList =[]
     cordsTable = PrettyTable(["x","y"])
     while x <= max:
-        y = (a*x**2)+(b*x)+c
+        y = (a*(x**2))+(b*x)+c
         x = round(x, 2)
         y = round(y,2)
         xCordList.append(x)
@@ -92,13 +92,12 @@ def restart():
 def quadraticFormula(a,b,c):
     discriminant = (b**2)-(4*a*c)
     if discriminant == 0:
-        root = (-b+sqrt(discriminant))/2*a
-        print(f"The root of the equation is {root}.\n")
+        sol = (- b + math.sqrt(discriminant))/(2*a)
+        print(f"The root of the equation is {sol} (rounded to 2 d.p.).\n")
     elif discriminant > 0:
-        root1 = (-b+sqrt(discriminant))/2*a
-        root2 = (-b-sqrt(discriminant))/2*a
-        print(f"The roots of the equation are {round(root1,2)} and {round(root2,2)}.\n")
-
+        sol1 = (- b + math.sqrt(discriminant))/(2*a)
+        sol2 = (- b - math.sqrt(discriminant))/(2*a)
+        print(f"The roots of the equation are {round(sol1,2)} and {round(sol2,2)} (rounded to 2 d.p.).\n")
 
 
 def main():
@@ -111,7 +110,7 @@ def main():
         print("Please enter maximum and minimum x range for coordinates finder.")
         max_min_list = maxMinRecieve()
         while True:
-            increment = input("X-value increments (floats and integers accepted): ")
+            increment = input("X-value increments (floats and integers accepted, do not enter 0): ")
             try:
                 increment = float(increment)
                 break
