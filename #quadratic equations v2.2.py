@@ -4,15 +4,16 @@
 from prettytable import PrettyTable
 import matplotlib.pyplot as plt
 import numpy as np
+from math import sqrt
 
 
 
 def discriminant(a,b,c):
     discriminant = (b**2)-(4*a*c)
     if discriminant > 0:
-        print("Equation has 2 real and distinct roots.\n")
+        print("Equation has 2 real and distinct roots.")
     elif discriminant == 0:
-        print("Equation has 2 real and equal roots.\n")
+        print("Equation has 2 real and equal roots.")
     elif discriminant < 0:
         print("Equation has no real roots.\n")
 
@@ -88,6 +89,15 @@ def restart():
         else:
             print("Invalid input. Re-enter.")
 
+def quadraticFormula(a,b,c):
+    discriminant = (b**2)-(4*a*c)
+    if discriminant == 0:
+        root = (-b+sqrt(discriminant))/2*a
+        print(f"The root of the equation is {root}.\n")
+    elif discriminant > 0:
+        root1 = (-b+sqrt(discriminant))/2*a
+        root2 = (-b-sqrt(discriminant))/2*a
+        print(f"The roots of the equation are {round(root1,2)} and {round(root2,2)}.\n")
 
 
 
@@ -97,16 +107,18 @@ def main():
         print("Welcome to the quadratic equatvaion solver! Please enter your values in the following sequence ax^2+bx+c=0.\nThe program will automatically solve for x and find the coordinates of points for the graph of the equation, as well as weather it has real roots.")
         valuesList = convert_Input_To_Int()
         discriminant(valuesList[0],valuesList[1],valuesList[2])
+        quadraticFormula(valuesList[0],valuesList[1],valuesList[2])
         print("Please enter maximum and minimum x range for coordinates finder.")
         max_min_list = maxMinRecieve()
         while True:
-            increment = input("X-value increments (only floats and integers accepted, note that smaller increments will make the coordinates table harder to read): ")
+            increment = input("X-value increments (floats and integers accepted): ")
             try:
                 increment = float(increment)
                 break
             except ValueError:
                 print("Invalid input. Try again.\n")
         coordinatesFind(max_min_list[1],max_min_list[0],valuesList[0],valuesList[1],valuesList[2],increment)
+
         start = restart()
 
         
